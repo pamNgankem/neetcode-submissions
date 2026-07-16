@@ -1,0 +1,43 @@
+class Solution 
+{
+    public boolean checkInclusion(String s1, String s2) 
+    {
+        if(s2.length() < s1.length())
+        {
+            return false;
+        }
+
+        for(int i = 0; i <= s2.length() - s1.length(); i++)
+        {
+            String s = s2.substring(i, i + s1.length());
+            HashMap<Character,Integer> frequency = new HashMap<Character, Integer>();
+            HashMap<Character,Integer> frequency1 = new HashMap<Character, Integer>();
+            int count = 0;
+
+            for(int k = 0; k < s.length(); k++)
+            {
+                frequency.put(s.charAt(k), frequency.getOrDefault(s.charAt(k), 0) + 1);
+                frequency1.put(s1.charAt(k), frequency1.getOrDefault(s1.charAt(k), 0) + 1);
+            }
+
+            for(int j = 0; j < s1.length(); j++)
+            {
+                if(s.indexOf(s1.charAt(j)) == -1 || frequency.get((s1.charAt(j))) != frequency1.get((s1.charAt(j))))
+                {
+                    break;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+
+            if(count == s1.length())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
